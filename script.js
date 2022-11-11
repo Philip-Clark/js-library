@@ -65,7 +65,9 @@ function generateBookHtml(book, index) {
           <p class='pageCount'>${book.pageCount}</p>
       </div>
       <div>
-        <button class="readBook" read="${book.read}" onclick="updateRead(${index})">Read</button>
+        <button class="readBook" read="${book.read}" onclick="updateRead(${index})">${
+    book.read ? 'Read' : 'Unread'
+  }</button>
         <button class="readBook" onclick="deleteBook(${index})">remove</button>
       </div>
     </li >
