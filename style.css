@@ -73,10 +73,12 @@ button:active {
 .bookTitle,
 .bookAuthor,
 .pageCount {
-  word-wrap: normal;
-  max-height: 10rem;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #add {
