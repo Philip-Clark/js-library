@@ -61,10 +61,22 @@ button:active {
   box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.364);
   padding: 1rem 2rem;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .bookTitle {
   color: var(--colorFour);
+}
+
+.bookTitle,
+.bookAuthor,
+.pageCount {
+  word-wrap: normal;
+  max-height: 10rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 #add {
@@ -132,6 +144,7 @@ dialog::backdrop {
   border: none;
   padding: 0.2rem 1rem;
   border-radius: 90000px;
+  margin-bottom: 0.5rem;
 }
 
 .readBook[read='true'] {

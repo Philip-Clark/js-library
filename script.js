@@ -40,12 +40,15 @@ Library.prototype.addBooksToLibrary = function (books = []) {
 
 Library.prototype.displayBooks = function (parentId = 'library') {
   const parent = document.getElementById(parentId);
+  let newInnerHTML = '';
   parent.innerHTML = '';
 
   this.books.forEach((book, index) => {
     console.log(index);
-    parent.insertAdjacentHTML('beforeend', generateBookHtml(book, index));
+    newInnerHTML += generateBookHtml(book, index);
   });
+
+  parent.insertAdjacentHTML('beforeend', newInnerHTML);
 };
 // End
 
@@ -53,11 +56,15 @@ Library.prototype.displayBooks = function (parentId = 'library') {
 function generateBookHtml(book, index) {
   return `
     <li class='bookCard' id="${index}">
-      <h2 class='bookTitle'>${book.title}</h2>
-      <h3 class='bookAuthor'>${book.author}</h3>
-      <p class='pageCount'>${book.pageCount}</p>
-      <button class="readBook" read="${book.read}" onclick="updateRead(${index})">Read</button>
-      <button class="readBook" onclick="deleteBook(${index})">remove</button>
+      <div>
+        <h2 class='bookTitle'>${book.title}</h2>
+          <h3 class='bookAuthor'>${book.author}</h3>
+          <p class='pageCount'>${book.pageCount}</p>
+      </div>
+      <div>
+        <button class="readBook" read="${book.read}" onclick="updateRead(${index})">Read</button>
+        <button class="readBook" onclick="deleteBook(${index})">remove</button>
+      </div>
     </li >
     `;
 }
