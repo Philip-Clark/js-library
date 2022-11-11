@@ -1,0 +1,161 @@
+body,
+html,
+:root {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --colorOne: #242426;
+  --colorTwo: #2a3340;
+  --colorThree: #394a59;
+  --colorFour: #f2f2f2;
+  --colorFive: #a6a6a6;
+
+  --largePadding: 2rem;
+  --smallPadding: 1rem;
+
+  --bookWidth: 200px;
+}
+
+body {
+  background-color: var(--colorOne);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+/* Google Icons */
+.material-symbols-outlined {
+  color: var(--colorFour);
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.header {
+  background-color: var(--colorTwo);
+  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.364);
+  padding: var(--smallPadding) calc(var(--largePadding));
+  color: var(--colorFour);
+  display: flex;
+}
+
+#library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--bookWidth), 1fr));
+  padding: var(--largePadding);
+  gap: var(--smallPadding);
+  list-style: none;
+}
+.bookCard {
+  background-color: var(--colorTwo);
+  color: var(--colorFive);
+  box-shadow: 0px 2px 8px -1px rgba(0, 0, 0, 0.364);
+  padding: 1rem 2rem;
+  border-radius: 5px;
+}
+
+.bookTitle {
+  color: var(--colorFour);
+}
+
+#add {
+  width: calc(100% - var(--largePadding) * 2);
+  background-color: var(--colorTwo);
+  border-radius: 5px;
+  margin: var(--largePadding);
+  padding: var(--smallPadding) var(--largePadding);
+}
+
+dialog {
+  text-align: center;
+  position: absolute;
+  min-width: 20vw;
+  margin-top: 25vh;
+  padding: var(--largePadding);
+  background-color: var(--colorOne);
+  color: var(--colorFour);
+  border-radius: 5px;
+  border: none;
+}
+dialog label {
+  width: fit-content;
+  margin-bottom: 0.5rem;
+}
+
+dialog input {
+  background-color: transparent;
+  border: solid rgb(184, 184, 184) 2px;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 9000px;
+}
+
+dialog button {
+  background-color: var(--colorFive);
+  border-radius: 5000px;
+  padding: 0.5rem;
+}
+input:checked {
+  color: red;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: solid rgb(184, 184, 184) 2px;
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0px 1000px var(--colorOne) inset;
+}
+
+dialog::backdrop {
+  background-color: #000000e7;
+}
+
+.readBook {
+  background-color: var(--colorFive);
+  border: none;
+  padding: 0.2rem 1rem;
+  border-radius: 90000px;
+}
+
+.readBook[read='true'] {
+  background-color: #4299e6;
+}
+
+#addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup:last-of-type {
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (min-width: 600px) {
+  :root {
+    --bookWidth: calc(33.33vw - calc(var(--smallPadding) * 4));
+  }
+}

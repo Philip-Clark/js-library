@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="script.js" defer></script>
+    <title>Library</title>
+  </head>
+  <body onload="">
+    <dialog id="addBookDialog">
+      <h1>Add Book</h1>
+      <form id="addForm" method="dialog">
+        <div class="inputGroup">
+          <label>Title</label>
+          <input type="text" minlength="1" required autofocus name="title" />
+        </div>
+        <div class="inputGroup">
+          <label>Author</label>
+          <input type="text" minlength="1" required name="author" />
+        </div>
+        <div class="inputGroup">
+          <label>Page Count</label> <input type="number" min="1" required name="pageCount" />
+        </div>
+        <div class="inputGroup">
+          <input type="checkbox" name="read" /><label>I've read this book</label>
+        </div>
+        <button id="closeModal" value="default">Add Book</button>
+      </form>
+    </dialog>
+
+    <div class="header">
+      <button type="button" class="addBook" id="addBook">
+        <span class="material-symbols-outlined">
+          add_circle
+        </span>
+      </button>
+
+      <h1>My Books</h1>
+    </div>
+    <ul id="library"></ul>
+  </body>
+</html>
