@@ -108,7 +108,7 @@ function parseFormData(event) {
   const pageCount = event.target.elements.pageCount.value;
   const read = event.target.elements.read.checked;
 
-  return { title, author, pageCount, read };
+  return new Book(title, author, pageCount, read);
 }
 
 const dialog = document.getElementById('addBookDialog');
