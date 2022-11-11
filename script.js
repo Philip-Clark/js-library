@@ -61,8 +61,8 @@ function generateBookHtml(book, index) {
     <li class='bookCard' id="${index}">
       <div>
         <h2 class='bookTitle'>${book.title}</h2>
-          <h3 class='bookAuthor'>${book.author}</h3>
-          <p class='pageCount'>${book.pageCount}</p>
+          <h3 class='bookAuthor'>Author: ${book.author}</h3>
+          <p class='pageCount'>Pages: ${book.pageCount}</p>
       </div>
       <div>
         <button class="readBook" read="${book.read}" onclick="updateRead(${index})">${
