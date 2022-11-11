@@ -29,11 +29,7 @@ function Library(books = []) {
 }
 
 Library.prototype.addBookToLibrary = function (book) {
-  if (book instanceof Book) {
-    this.books.push(book);
-  } else {
-    console.warn(`ERROR: Library.addBookToLibrary : given object is not an instance of Book`);
-  }
+  this.books.push(new Book(book.title, book.author, book.pageCount, book.read));
 };
 
 Library.prototype.addBooksToLibrary = function (books = []) {
@@ -52,6 +48,7 @@ Library.prototype.displayBooks = function (parentId = 'library') {
   });
 
   parent.insertAdjacentHTML('beforeend', newInnerHTML);
+  bake_cookie('library', this);
 };
 // End
 
@@ -85,19 +82,14 @@ function deleteBook(index) {
 }
 
 // ? new library with 2 books
-
-const bookA = new Book('Twenty Thousand Leagues Under the Seas', 'Jules Verne', 518, true);
-const bookB = new Book('Around the world in Eighty Days', 'Jules Verne', 255, true);
-const bookC = new Book('To the center of the Earth', 'Jules Verne', 255, true);
-const bookD = new Book('Mysterious Cavern', 'Jules Verne', 255, true);
-const bookE = new Book('Isaacs Storm', 'Erik Larson', 255, true);
-const bookF = new Book('Five weeks in a Balloon', 'Jules Verne', 255, false);
-const bookG = new Book('Dictionary', 'Erik Larson', 9000, false);
-const bookH = new Book('Madrid Codex', 'Maya', 112, false);
-const myLibrary = new Library();
-myLibrary.addBooksToLibrary([bookA, bookB, bookC, bookD, bookE, bookF, bookG, bookH]);
-
+let myLibrary = new Library();
 function loadBooks() {
+  if (read_cookie('library') == null) {
+    myLibrary.addBooksToLibrary([bookA, bookB, bookC, bookD, bookE, bookF, bookG, bookH]);
+    bake_cookie('library', myLibrary);
+  } else {
+    myLibrary.addBooksToLibrary(read_cookie('library')['books']);
+  }
   myLibrary.displayBooks('library');
 }
 
@@ -114,7 +106,7 @@ function parseFormData(event) {
   const pageCount = event.target.elements.pageCount.value;
   const read = event.target.elements.read.checked;
 
-  return new Book(title, author, pageCount, read);
+  return { title, author, pageCount, read };
 }
 
 const dialog = document.getElementById('addBookDialog');
@@ -122,3 +114,18 @@ const dialog = document.getElementById('addBookDialog');
 document.getElementById('addBook').addEventListener('click', (event) => {
   dialog.showModal();
 });
+
+// COOKIE HANDLER from https://stackoverflow.com/a/11344672/17977603
+function bake_cookie(name, value) {
+  const cookie = [name, '=', JSON.stringify(value)].join('');
+  document.cookie = cookie;
+}
+
+function read_cookie(name) {
+  let result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+  return result && (result = JSON.parse(result[1]));
+}
+
+function delete_cookie(name) {
+  document.cookie = [name, '=;', window.location.host.toString()].join('');
+}
