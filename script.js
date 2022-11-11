@@ -29,12 +29,16 @@ function Library(books = []) {
 }
 
 Library.prototype.addBookToLibrary = function (book) {
-  this.books.push(book);
+  if (book instanceof Book) {
+    this.books.push(book);
+  } else {
+    console.warn(`ERROR: Library.addBookToLibrary : given object is not an instance of Book`);
+  }
 };
 
 Library.prototype.addBooksToLibrary = function (books = []) {
   books.forEach((book) => {
-    this.books.push(book);
+    this.addBookToLibrary(book);
   });
 };
 
@@ -44,7 +48,6 @@ Library.prototype.displayBooks = function (parentId = 'library') {
   parent.innerHTML = '';
 
   this.books.forEach((book, index) => {
-    console.log(index);
     newInnerHTML += generateBookHtml(book, index);
   });
 
@@ -89,7 +92,8 @@ const bookE = new Book('Isaacs Storm', 'Erik Larson', 255, true);
 const bookF = new Book('Five weeks in a Balloon', 'Jules Verne', 255, false);
 const bookG = new Book('Dictionary', 'Erik Larson', 9000, false);
 const bookH = new Book('Madrid Codex', 'Maya', 112, false);
-const myLibrary = new Library([bookA, bookB, bookC, bookD, bookE, bookF, bookG, bookH]);
+const myLibrary = new Library();
+myLibrary.addBooksToLibrary([bookA, bookB, bookC, bookD, bookE, bookF, bookG, bookH]);
 
 function loadBooks() {
   myLibrary.displayBooks('library');
@@ -114,6 +118,5 @@ function parseFormData(event) {
 const dialog = document.getElementById('addBookDialog');
 
 document.getElementById('addBook').addEventListener('click', (event) => {
-  console.log('test');
   dialog.showModal();
 });
